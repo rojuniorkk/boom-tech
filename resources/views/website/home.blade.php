@@ -8,9 +8,9 @@
 
     <div class="py-12 bg-grey">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="overflow-hidden sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-4">
+                    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mb-4">
                         @forelse ($products as $product)
                             <a class="flex max-w-sm flex-col bg-white border shadow rounded-lg cursor-pointer hover:shadow-lg hover:scale-[1.15] transition duration-300"
                                 href="{{ route('product.show', ['id' => $product->id, 'slug' => $product->slug]) }}">
@@ -26,7 +26,6 @@
                                     <h4 class="text-lg">R$ {{ number_format($product->price, 2, ',', '.') }}</h4>
                                     {{-- <p class="text-justify">{{ Str::limit($product->description, 60) }}</p> --}}
                                 </section>
-
                             </a>
                         @empty
                         @endforelse
