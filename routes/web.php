@@ -19,6 +19,9 @@ Route::group([
     'prefix' => '/'
 ], function () {
     Route::get('/', [WebsiteController::class, 'index'])->name('index');
+    Route::get('/sobrenos', function () {
+        return view('website.aboutus');
+    })->name('about');
 });
 
 

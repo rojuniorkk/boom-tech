@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <x-slot name="pagename">Inicio</x-slot>
+    <x-slot name="pagename">Produtos</x-slot>
 
     <x-slot name="header">
         <h1 class="text-2xl">Nossos Produtos</h1>

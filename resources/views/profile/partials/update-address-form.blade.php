@@ -1,14 +1,58 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Informações da sua conta') }}
+            {{ __('Endereços Salvos') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Atualize suas informações de perfil e endereço de e-mail.") }}
+            {{ __('Adicione ou edite seus endereços.') }}
         </p>
     </header>
 
+    <section class="bg-white sm:rounded-lg text-gray-900">
+        <section class="py-5 w-full">
+
+            @if (!empty($user->addresses))
+                <section class="grid lg:grid-cols-2 lg:gap-8">
+                    @foreach ($user->addresses as $index => $address)
+                        <div class="border rounded-lg bgwhite p-2 flex w-sm">
+
+                            <div class="flex flex-wrap w-full">
+                                <div class="w-full flex p-1">
+                                    <div class="me-1 "><span class="font-bold">Rua: </span>{{ $address->rua }},</div>
+                                    <div class="me-1 "><span class="font-bold">Bairro: </span>{{ $address->rua }}</div>
+                                </div>
+
+                                <div class="w-full flex p-1">
+                                    <div class="me-1"><span class="font-bold">Nº</span> {{ $address->numero }},</div>
+                                    <div class="me-1"><span class="font-bold">CEP:</span>{{ $address->cep }},</div>
+                                    <div class="me-1"> - {{ $address->uf }}</div>
+                                </div>
+
+                                <div class="w-full flex p-1">
+                                    <div class="me-1"><span class="font-bold">Complemento:
+                                        </span>{{ $address->complemento }}</div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-center h-full">
+                                <a href=""><span class="material-symbols-outlined">edit</span></a>
+                                <a href=""><span class="material-symbols-outlined">delete</span></a>
+
+                            </div>
+
+                        </div>
+                    @endforeach
+                </section>
+            @else
+                <h1>Nenhum endereço foi cadastrado ainda.</h1>
+            @endif
+
+        </section>
+
+    </section>
+
+    {{--
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
@@ -24,17 +68,11 @@
         </div>
 
         <div>
-            <x-input-label for="lastname" :value="__('Sobrenome')" />
-            <x-text-input id="lastname" name="lastname" type="text" class="mt-1 block w-full" :value="old('lastname', $user->lastname)" required autofocus autocomplete="lastname" />
-            <x-input-error class="mt-2" :messages="$errors->get('lastname')" />
-        </div>
-
-        <div>
             <x-input-label for="email" :value="__('E-mail')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800">
                         {{ __('Your email address is unverified.') }}
@@ -51,9 +89,9 @@
                     @endif
                 </div>
             @endif
-        </div>
+        </div> --}}
 
-        <div class="flex items-center gap-4">
+    {{-- <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Salvar') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
@@ -66,5 +104,5 @@
                 >{{ __('Salvo com sucesso.') }}</p>
             @endif
         </div>
-    </form>
+    </form> --}}
 </section>

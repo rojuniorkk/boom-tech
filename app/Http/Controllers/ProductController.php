@@ -37,7 +37,7 @@ class ProductController extends Controller
     public function show($id, $slug)
     {
         $product = Product::where('id', $id)->where('slug', $slug)->first();
-        return $product;
+        return view('website.product-show', compact('product'));
     }
 
     /**
