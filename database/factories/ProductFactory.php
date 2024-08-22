@@ -26,7 +26,7 @@ class ProductFactory extends Factory
             'description' => $this->faker->paragraph(),
             'price' => $this->faker->numberBetween(100, 1000),
             'slug' => Str::slug($name),
-            'image' => $this->faker->imageUrl(640, 480),
+            'image' => '\product\template.png',
             'category_id' => Category::get()->random()->id,
             'company_id' => Company::get()->random()->id
         ];

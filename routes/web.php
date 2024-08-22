@@ -7,15 +7,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-
 Route::group([
     'as' => 'website.',
     'prefix' => '/'
@@ -46,8 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/carrinho-store', [CartController::class, 'store'])->name('cart.store');
     Route::post('/carrinho-edit', [CartController::class, 'edit'])->name('cart.edit');
 
-    route::get('/pedido', [CheckoutController::class, 'index'])->name('checkout.index');
-    route::post('/checkout', [CheckoutController::class, 'create'])->name('checkout.create');
+    Route::get('/pedido', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'create'])->name('checkout.create');
 });
 
 require __DIR__ . '/auth.php';
