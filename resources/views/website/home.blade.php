@@ -18,7 +18,7 @@
                                 href="{{ route('product.show', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                 <section>
                                     <figure>
-                                        <img class="rounded max-w-300px max-h-300px" src="{{ Storage::url($product->image) }}"
+                                        <img class="rounded max-w-300px max-h-300px" src="{{ $product->image }}"
                                             alt="{{ $product->slug }}">
                                     </figure>
                                 </section>
