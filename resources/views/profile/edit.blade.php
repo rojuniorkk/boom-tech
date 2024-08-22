@@ -9,7 +9,9 @@
     </x-slot>
 
     <x-slot name="script">
-        <script src="{{ asset('js/profile.js') }}">
+        <script src="{{ asset('js/profile.js') }}"></script>
+
+        <script>
             $('#cep_input').mask('00000-000');
         </script>
     </x-slot>

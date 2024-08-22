@@ -23,7 +23,7 @@
 
         <div class="max-w-sm">
             <x-input-label for="update_password_current_password" :value="__('CEP')" />
-            <x-text-input id="update_password_current_password" id="cep_input" name="cep" value="{{ $address !== null ? $address->cep : '' }}" type="text" class="mt-1 block w-full"
+            <x-text-input id="update_password_current_password" id="cep_input" maxlength="9" name="cep" value="{{ $address !== null ? $address->cep : '' }}" type="text" class="mt-1 block w-full"
                 autocomplete="cep" />
             <x-input-error :messages="$errors->updateAddress->get('cep')" class="mt-2" />
         </div>

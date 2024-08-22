@@ -49,7 +49,7 @@
                                 {{ __('Perfil') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('cart.index')">
                                 {{ __('Carrinho') }}
                             </x-dropdown-link>
 

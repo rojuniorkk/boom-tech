@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Product;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $loadaer = AliasLoader::getInstance();
+        $loadaer->alias('Cart', \Darryldecode\Cart\Facades\CartFacade::class);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
@@ -40,7 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Cart
-
+    Route::get('/carrinho', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/carrinho-store', [CartController::class, 'store'])->name('cart.store');
+    Route::post('/carrinho-edit', [CartController::class, 'edit'])->name('cart.edit');
 });
 
 require __DIR__ . '/auth.php';
