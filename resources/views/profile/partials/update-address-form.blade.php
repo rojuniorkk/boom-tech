@@ -29,6 +29,8 @@
                 value="{{ $address !== null ? $address->cep : '' }}" type="text" class="mt-1 block w-full"
                 autocomplete="cep" />
             <x-input-error :messages="$errors->updateAddress->get('cep')" class="mt-2" />
+
+                <label id="cep_error" class="text-grey-900 text-md"></label>
         </div>
 
         <div class="flex flex-col">

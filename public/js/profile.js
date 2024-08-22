@@ -1,5 +1,4 @@
 function meu_callback(conteudo) {
-    
     let RUA = document.getElementById("rua");
     let BAIRRO = document.getElementById("bairro");
     let CIDADE = document.getElementById("cidade");
@@ -17,11 +16,18 @@ function meu_callback(conteudo) {
                 option.removeAttribute("selected");
             }
         });
+    } else {
+        let ERROR = document.getElementById("cep_error");
+        ERROR.innerHTML = "CEP não encontrado";
+        setTimeout(() => {
+            ERROR.innerHTML = "";
+        }, 2000);
     }
 }
 
 function validacep(valor) {
     var cep = valor.replace(/\D/g, "");
+    let ERROR = document.getElementById("cep_error");
 
     if (cep != "") {
         var validacep = /^[0-9]{8}$/;
@@ -33,6 +39,11 @@ function validacep(valor) {
                 cep +
                 "/json/?callback=meu_callback";
             document.body.appendChild(script);
+        } else {
+            ERROR.innerHTML = "Esse CEP não é válido!";
+            setTimeout(() => {
+                ERROR.innerHTML = "";
+            }, 2000);
         }
     }
 }
