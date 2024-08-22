@@ -13,7 +13,7 @@ class UserAddressController extends Controller
     {
 
         $user = Auth::user();
-        $address = Address::where('user_id', $user->id);
+        $address = Address::where('user_id', $user->id)->first();
 
         $request->validate([
             'rua' => 'required',
@@ -24,8 +24,6 @@ class UserAddressController extends Controller
             'bairro' => 'required',
             'cidade' => 'required'
         ]);
-
-
 
         if ($address == null) {
             Address::create([

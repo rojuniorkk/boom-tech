@@ -45,15 +45,19 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('profile.edit')" >
                                 {{ __('Perfil') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('cart.index')">
+                            <x-dropdown-link :href="route('cart.index')" class="flex justify-between">
                                 {{ __('Carrinho') }}
+
+                                @if (\Cart::getTotalQuantity() > 0)
+                                    <span class="rounded-lg px-2 text-white bg-emerald-700">{{ Cart::getTotalQuantity() }}</span>
+                                @endif
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('cart.checkout')">
+                            <x-dropdown-link :href="route('checkout.index')">
                                 {{ __('Pedidos') }}
                             </x-dropdown-link>
 
@@ -128,8 +132,7 @@
                 </div>
             @else
                 <div class="mt-3 space-y-1">
-                    <a href="{{ route('login') }}"
-                        class="font-medium text-base text-gray-800 p-4">Entrar/Cadastrar</a>
+                    <a href="{{ route('login') }}" class="font-medium text-base text-gray-800 p-4">Entrar/Cadastrar</a>
                 </div>
             @endif
         </div>

@@ -17,9 +17,13 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 flex justify-between">
                         <span class="text-2xl"> R$ {{ number_format(\Cart::getTotal(), 2, ',', '.') }}</span>
-                        <button
-                            class="bg-emerald-800 hover:bg-emerald-900 hover:scale-[1.05] transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded">Finalizar
-                            Compra</button>
+
+                        <form action="{{ route('checkout.create') }}" method="post">
+                            @csrf
+                            <button
+                                class="bg-emerald-800 hover:bg-emerald-900 hover:scale-[1.05] transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded">Finalizar
+                                Compra</button>
+                        </form>
                     </div>
                 </div>
 
@@ -89,7 +93,8 @@
                         <span class="material-symbols-outlined text-8xl space-y-2">sentiment_sad</span>
                         <h1 class="text-3xl">Carrinho Vazio...</h1>
                         <h4 class="text-lg">Que tal adicionar algo?
-                            <a class="hover:underline text-emerald-700 hover:text-emerald-900" href="{{ route('website.index') }}">Produtos</a>
+                            <a class="hover:underline text-emerald-700 hover:text-emerald-900"
+                                href="{{ route('website.index') }}">Produtos</a>
                         </h4>
                     </div>
                 </div>

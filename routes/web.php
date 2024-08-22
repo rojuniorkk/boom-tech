@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
@@ -44,7 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/carrinho', [CartController::class, 'index'])->name('cart.index');
     Route::post('/carrinho-store', [CartController::class, 'store'])->name('cart.store');
     Route::post('/carrinho-edit', [CartController::class, 'edit'])->name('cart.edit');
-    route::match(['get', 'post'],'/pedido', [CartController::class, 'checkout'])->name('cart.checkout');
+
+    route::get('/pedido', [CheckoutController::class, 'index'])->name('checkout.index');
+    route::post('/checkout', [CheckoutController::class, 'create'])->name('checkout.create');
 });
 
 require __DIR__ . '/auth.php';
