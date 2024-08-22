@@ -39,7 +39,7 @@ return new class extends Migration
 
         Schema::create('addresses_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->cascade('delete');
+            $table->foreignId('user_id')->cascade('delete')->unique();
             $table->text('cep');
             $table->text('rua');
             $table->text('bairro');

@@ -3,4 +3,4 @@
 </svg> --}}
 
 
-<img {{ $attributes }} src="{{ asset('img/logo.png') }}" alt="boom-tech-logo">
+<a href="{{ route('website.index') }}"><img {{ $attributes }} src="{{ asset('img/logo.png') }}" alt="boom-tech-logo"></a>

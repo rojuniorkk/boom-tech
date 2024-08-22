@@ -1,108 +1,101 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Endereços Salvos') }}
+            {{ __('Seu endereço') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __('Adicione ou edite seus endereços.') }}
+            {{ __('Endereço padrão para o envio de seus pedidos.') }}
         </p>
     </header>
 
-    <section class="bg-white sm:rounded-lg text-gray-900">
-        <section class="py-5 w-full">
+    <x-slot name="script">
+        <script src="{{ asset('js/profile.js') }}"></script>
+    </x-slot>
 
-            @if (!empty($user->addresses))
-                <section class="grid lg:grid-cols-2 lg:gap-8">
-                    @foreach ($user->addresses as $index => $address)
-                        <div class="border rounded-lg bgwhite p-2 flex w-sm">
-
-                            <div class="flex flex-wrap w-full">
-                                <div class="w-full flex p-1">
-                                    <div class="me-1 "><span class="font-bold">Rua: </span>{{ $address->rua }},</div>
-                                    <div class="me-1 "><span class="font-bold">Bairro: </span>{{ $address->rua }}</div>
-                                </div>
-
-                                <div class="w-full flex p-1">
-                                    <div class="me-1"><span class="font-bold">Nº</span> {{ $address->numero }},</div>
-                                    <div class="me-1"><span class="font-bold">CEP:</span>{{ $address->cep }},</div>
-                                    <div class="me-1"> - {{ $address->uf }}</div>
-                                </div>
-
-                                <div class="w-full flex p-1">
-                                    <div class="me-1"><span class="font-bold">Complemento:
-                                        </span>{{ $address->complemento }}</div>
-                                </div>
-                            </div>
-
-                            <div class="flex justify-center h-full">
-                                <a href=""><span class="material-symbols-outlined">edit</span></a>
-                                <a href=""><span class="material-symbols-outlined">delete</span></a>
-
-                            </div>
-
-                        </div>
-                    @endforeach
-                </section>
-            @else
-                <h1>Nenhum endereço foi cadastrado ainda.</h1>
-            @endif
-
-        </section>
-
-    </section>
-
-    {{--
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    <form method="post" action="{{ route('address.store') }}" class="mt-6 space-y-6">
         @csrf
-    </form>
+        @method('post')
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
+        @php
+            $address = $user->address();
+        @endphp
 
-        <div>
-            <x-input-label for="name" :value="__('Nome')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        <div class="max-w-sm">
+            <x-input-label for="update_password_current_password" :value="__('CEP')" />
+            <x-text-input id="update_password_current_password" id="cep_input" name="cep" value="{{ $address !== null ? $address->cep : '' }}" type="text" class="mt-1 block w-full"
+                autocomplete="cep" />
+            <x-input-error :messages="$errors->updateAddress->get('cep')" class="mt-2" />
         </div>
 
-        <div>
-            <x-input-label for="email" :value="__('E-mail')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
+        <div class="flex flex-col">
+            <div class="grid grid-cols-2 gap-3">
                 <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
+                    <x-input-label for="update_password_current_password" :value="__('Rua')" />
+                    <x-text-input id="update_password_current_password" id="rua" value="{{ $address !== null ? $address->rua : '' }}" name="rua" type="text"
+                        class="mt-1 block w-full" autocomplete="rua" />
+                    <x-input-error :messages="$errors->updateAddress->get('rua')" class="mt-2" />
                 </div>
-            @endif
-        </div> --}}
+                <div>
+                    <x-input-label for="update_password_current_password" :value="__('Bairro')" />
+                    <x-text-input id="update_password_current_password" id="bairro" value="{{ $address !== null ? $address->bairro : '' }}" name="bairro" type="text"
+                        class="mt-1 block w-full" autocomplete="bairro" />
+                    <x-input-error :messages="$errors->updateAddress->get('bairro')" class="mt-2" />
+                </div>
 
-    {{-- <div class="flex items-center gap-4">
+                <div class="grid grid-cols-3 gap-3 col-span-2">
+                    <div>
+                        <x-input-label for="update_password_current_password" :value="__('Cidade')" />
+                        <x-text-input id="update_password_current_password" id="cidade" value="{{ $address !== null ? $address->cidade : '' }}" name="cidade" type="text"
+                            class="mt-1 block w-full" autocomplete="cidade" />
+                        <x-input-error :messages="$errors->updateAddress->get('cidade')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="update_password_current_password" :value="__('Estado')" />
+
+                        <select id="estado" name="uf"
+                            class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm block w-full p-2">
+                            <option value="">Selecione</option>
+
+                            @php
+                                 $ufs = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MS','MT','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'];
+                            @endphp
+
+                            @foreach ($ufs as $uf)
+                                <option {{ $address != null && $uf == $address->uf ? 'selected' : '' }}  value="{{ $uf }}">{{ $uf }}</option>
+                            @endforeach
+
+                        </select>
+
+                        <x-input-error :messages="$errors->updateAddress->get('uf')" class="mt-2" />
+                    </div>
+                    <div class="col-span-1">
+                        <x-input-label for="update_password_current_password" :value="__('Nº')" />
+                        <x-text-input id="update_password_current_password" value="{{ $address !== null ? $address->numero : '' }}" name="numero" type="text"
+                            class="mt-1 block w-full" autocomplete="numero" />
+                        <x-input-error :messages="$errors->updateAddress->get('numero')" class="mt-2" />
+                    </div>
+
+                </div>
+
+                <div class="col-span-2">
+                    <x-input-label for="update_password_current_password" :value="__('Complemento')" />
+                    <x-text-input id="update_password_current_password" value="{{ $address !== null ? $address->complemento : '' }}" name="complemento" type="text"
+                        class="mt-1 block w-full" autocomplete="complemento" />
+                    <x-input-error :messages="$errors->updateAddress->get('complemento')" class="mt-2" />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Salvar') }}</x-primary-button>
 
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Salvo com sucesso.') }}</p>
+            @if (session('status') === 'address-success')
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                    class="text-sm text-gray-600">{{ __('Endereço alterado com sucesso.') }}</p>
             @endif
         </div>
-    </form> --}}
+    </form>
 </section>

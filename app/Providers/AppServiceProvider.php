@@ -20,8 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->share([
-            'products' => Product::paginate(20),
-        ]);
+        try {
+            view()->share([
+                'products' => Product::paginate(20),
+            ]);
+        } catch (\Throwable $th) {
+        }
     }
 }
