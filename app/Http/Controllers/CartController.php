@@ -27,7 +27,10 @@ class CartController extends Controller
             'associatedModel' => $product
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('alert-error', [
+            'message' => 'Item adicionado ao carrinho',
+            'color' => 'green',
+        ]);
     }
 
     public function edit(Request $request)

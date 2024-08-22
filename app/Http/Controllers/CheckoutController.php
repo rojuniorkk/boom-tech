@@ -32,7 +32,7 @@ class CheckoutController extends Controller
                 $user = Auth::user();
 
                 if($user->address() == null) {
-                    return redirect()->back()->with('checkout-error', 'address-no-set');
+                    return redirect()->route('profile.edit')->with('alert-error', ['message' => 'Adicione um endereço para finalizar a compra!', 'color'=>'yellow']);
                 }
 
                $checkout = Checkout::create([
