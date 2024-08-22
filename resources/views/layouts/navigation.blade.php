@@ -53,6 +53,10 @@
                                 {{ __('Carrinho') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link :href="route('cart.checkout')">
+                                {{ __('Pedidos') }}
+                            </x-dropdown-link>
+
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

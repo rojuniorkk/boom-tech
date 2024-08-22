@@ -50,4 +50,13 @@ class CartController extends Controller
 
         return redirect()->back();
     }
+
+    public function checkout(Request $request)
+    {
+        if($request->method() == 'GET'){
+            return view('profile.checkout');
+        }
+
+        
+    }
 }

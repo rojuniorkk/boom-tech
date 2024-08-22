@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/carrinho', [CartController::class, 'index'])->name('cart.index');
     Route::post('/carrinho-store', [CartController::class, 'store'])->name('cart.store');
     Route::post('/carrinho-edit', [CartController::class, 'edit'])->name('cart.edit');
+    route::match(['get', 'post'],'/pedido', [CartController::class, 'checkout'])->name('cart.checkout');
 });
 
 require __DIR__ . '/auth.php';
